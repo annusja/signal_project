@@ -1,4 +1,4 @@
-package com.cardio_generator.outputs;
+package com.cardiogenerator.outputs;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -6,12 +6,28 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.Executors;
 
+/**
+ * Streams the simulated data to TCP clients connected to the specified port
+ */
 public class TcpOutputStrategy implements OutputStrategy {
 
+    /**
+     * connects to tcp server
+     */
     private ServerSocket serverSocket;
+    /**
+     * connects the client
+     */
     private Socket clientSocket;
+    /**
+     * for putting out the information
+     */
     private PrintWriter out;
 
+    /**
+     * starts a TCP server on the specified port, connects client
+     * @param port through where to stream the information
+     */
     public TcpOutputStrategy(int port) {
         try {
             serverSocket = new ServerSocket(port);
@@ -32,6 +48,13 @@ public class TcpOutputStrategy implements OutputStrategy {
         }
     }
 
+    /**
+     * sends the specified information to TCP clients connected to the specified port and prints it
+     * @param patientId the numerical identifier of a patient
+     * @param timestamp long number of when the data generation happened
+     * @param label string which specifies what kind of data is shown
+     * @param data produced information about the specified patient
+     */
     @Override
     public void output(int patientId, long timestamp, String label, String data) {
         if (out != null) {
