@@ -22,7 +22,8 @@ public class AlertGenerator implements PatientDataGenerator {
   private boolean[] alertStates; // false = resolved, true = pressed
 
   /**
-   * creates the AlertGenerator object and initializes the alertStates boolean array to size one bigger than number of patients
+   * creates the AlertGenerator object and
+   * initializes the alertStates boolean array to size one bigger than number of patients
    * @param patientCount number of patients for which to create alert data
    */
   public AlertGenerator(int patientCount) {
@@ -30,7 +31,9 @@ public class AlertGenerator implements PatientDataGenerator {
   }
 
   /**
-   * randomly resolves or triggers the alert state for a specified patient,saves this information in alertStates array, outputs the information based on specified output strategy
+   * randomly resolves or triggers the alert state for a specified patient,
+   * saves this information in alertStates array,
+   * outputs the information based on specified output strategy
    * @param patientId the numerical identifier of a patient
    * @param outputStrategy the OutputStrategy object which determines how and where to return the generated data
    */
