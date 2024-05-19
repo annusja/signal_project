@@ -10,18 +10,39 @@ import java.nio.file.StandardOpenOption;
 import java.util.concurrent.ConcurrentHashMap;
 
 // renamed class to be in UpperCamelCase
+/**
+ * Saves the simulated data to files within the specified directory.
+ */
 public class FileOutputStrategy implements OutputStrategy {
 
   // renamed to lowerCamelCase here and in all usages
+  /**
+   * String of where to put all the created files
+   */
   private String baseDirectory;
   // renamed to lowerCamelCase here and in all usages (couldn't decide if it's a true constant or not)
+  /**
+   * hashmap for holding the paths to files
+   */
   public final ConcurrentHashMap<String, String> fileMap = new ConcurrentHashMap<>();
 
   // renamed to match new class name, deleted linebreak for readability
+
+  /**
+   * creates the FileOutputStrategy object, initializes baseDirectory String
+   * @param baseDirectory String of where to put all the created files
+   */
   public FileOutputStrategy(String baseDirectory) {
     this.baseDirectory = baseDirectory;
   }
 
+  /**
+   * creates a directory and writes the specified data to the file
+   * @param patientId the numerical identifier of a patient
+   * @param timestamp long number of when the data generation happened
+   * @param label string which specifies what kind of data is shown
+   * @param data produced information about the specified patient
+   */
   @Override
   public void output(int patientId, long timestamp, String label, String data) {
     try {
