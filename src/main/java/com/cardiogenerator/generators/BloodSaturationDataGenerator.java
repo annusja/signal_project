@@ -8,10 +8,11 @@ import com.cardiogenerator.outputs.OutputStrategy;
  * handles the creation of blood saturation information for all patients
  */
 public class BloodSaturationDataGenerator implements PatientDataGenerator {
+    //renamed to all caps as it's a constant
     /**
      * randomizer that generates pseudorandom numbers
      */
-    private static final Random random = new Random();
+    private static final Random RANDOM = new Random();
     /**
      * integer array of previous blood saturation values for all patients
      */
@@ -27,7 +28,7 @@ public class BloodSaturationDataGenerator implements PatientDataGenerator {
 
         // Initialize with baseline saturation values for each patient
         for (int i = 1; i <= patientCount; i++) {
-            lastSaturationValues[i] = 95 + random.nextInt(6); // Initializes with a value between 95 and 100
+            lastSaturationValues[i] = 95 + RANDOM.nextInt(6); // Initializes with a value between 95 and 100
         }
     }
 
@@ -42,7 +43,7 @@ public class BloodSaturationDataGenerator implements PatientDataGenerator {
     public void generate(int patientId, OutputStrategy outputStrategy) {
         try {
             // Simulate blood saturation values
-            int variation = random.nextInt(3) - 1; // -1, 0, or 1 to simulate small fluctuations
+            int variation = RANDOM.nextInt(3) - 1; // -1, 0, or 1 to simulate small fluctuations
             int newSaturationValue = lastSaturationValues[patientId] + variation;
 
             // Ensure the saturation stays within a realistic and healthy range

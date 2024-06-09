@@ -11,10 +11,11 @@ import java.util.Random;
  */
 public class AlertGenerator implements PatientDataGenerator {
 
+  //renamed to all caps as it's a constant
   /**
    * randomizer that generates pseudorandom numbers
    */
-  public static final Random randomGenerator = new Random();
+  public static final Random RANDOM_GENERATOR = new Random();
   // renamed to lowerCamelCase here and in all usages
   /**
    * boolean array of alert states for all patients, where false = resolved, true = pressed
@@ -41,7 +42,7 @@ public class AlertGenerator implements PatientDataGenerator {
   public void generate(int patientId, OutputStrategy outputStrategy) {
     try {
       if (alertStates[patientId]) {
-        if (randomGenerator.nextDouble() < 0.9) { // 90% chance to resolve
+        if (RANDOM_GENERATOR.nextDouble() < 0.9) { // 90% chance to resolve
           alertStates[patientId] = false;
           // Output the alert
           outputStrategy.output(patientId, System.currentTimeMillis(), "Alert", "resolved");
@@ -50,7 +51,7 @@ public class AlertGenerator implements PatientDataGenerator {
         // renamed to lowerCamelCase here and in all usages
         double lambda = 0.1; // Average rate (alerts per period), adjust based on desired frequency
         double p = -Math.expm1(-lambda); // Probability of at least one alert in the period
-        boolean alertTriggered = randomGenerator.nextDouble() < p;
+        boolean alertTriggered = RANDOM_GENERATOR.nextDouble() < p;
 
         if (alertTriggered) {
           alertStates[patientId] = true;
