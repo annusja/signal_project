@@ -1,0 +1,2 @@
+overall the code is barely tested because i am bery tired and didnt do it
+as for the alerts, i messed up and wrote the code in a way that makes them dissapear into nothingness and it's too late to rewrite it
