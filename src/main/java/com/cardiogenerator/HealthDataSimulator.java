@@ -30,6 +30,7 @@ import java.util.ArrayList;
  */
 public class HealthDataSimulator {
 
+    private static HealthDataSimulator instance;
     /**
      * number of patients used in the simulation
      */
@@ -45,7 +46,7 @@ public class HealthDataSimulator {
     /**
      * randomizer that generates pseudorandom numbers
      */
-    private static final Random random = new Random();
+    private static final Random RANDOM = new Random();
 
     /**
      * executes the simulation of all health data for patients
@@ -62,6 +63,18 @@ public class HealthDataSimulator {
         Collections.shuffle(patientIds); // Randomize the order of patient IDs
 
         scheduleTasksForPatients(patientIds);
+    }
+
+    private HealthDataSimulator(int patientCount, ScheduledExecutorService scheduler, OutputStrategy outputStrategy) {
+        this.patientCount = patientCount;
+        this.scheduler = scheduler;
+        this.outputStrategy = outputStrategy;
+
+    }
+
+    public static HealthDataSimulator getInstanceOfHealthDataSimulator(int patientCount, ScheduledExecutorService scheduler, OutputStrategy outputStrategy) {
+        if(instance==null) instance = new HealthDataSimulator(patientCount,scheduler,outputStrategy);
+        return instance;
     }
 
     /**
@@ -190,6 +203,6 @@ public class HealthDataSimulator {
      * @param timeUnit TimeUnit object for giving the period units
      */
     private static void scheduleTask(Runnable task, long period, TimeUnit timeUnit) {
-        scheduler.scheduleAtFixedRate(task, random.nextInt(5), period, timeUnit);
+        scheduler.scheduleAtFixedRate(task, RANDOM.nextInt(5), period, timeUnit);
     }
 }
